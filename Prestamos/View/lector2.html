@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia ITSVC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Un gris claro como fondo */
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e9ecef; /* Borde sutil alrededor del contenedor */
+        }
+
+        .btn-custom {
+            background-color: #e9ecef; /* Grisáceo como en la imagen */
+            color: #495057;
+            border: none;
+            border-radius: 0.375rem; /* Bordes redondeados */
+        }
+
+        .btn-custom:hover {
+            background-color: #dee2e6; /* Un gris más oscuro al pasar el ratón */
+        }
+
+        .btn-actions {
+            background-color: #198754; /* Un verde similar a la imagen */
+            color: white;
+            border: none;
+            border-radius: 0.5rem; /* Bordes más redondeados */
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .btn-actions:last-child {
+            margin-bottom: 0;
+        }
+
+        .search-bar {
+            border-bottom: 1px solid #ced4da;
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            border: none;
+        }
+
+        .table-container {
+            background-color: #e0e0e0; /* Gris claro para simular la apariencia */
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            border: none; /* Eliminar las líneas divisorias de la tabla */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center mb-3">
+            <h1>ASISTENCIA ITSVC</h1>
+            <div>
+                <button class="btn btn-custom">Inicio</button>
+                <button class="btn btn-custom">Cuenta</button>
+            </div>
+        </header>
+
+        <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-list me-2"></i>
+            <h2>Listado de Justificaciones</h2>
+            <div class="search-bar ms-auto">
+                <input type="text" placeholder="Buscar...">
+                <button class="btn btn-link"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Motivo</th>
+                        <th>Fecha justificación</th>
+                        <th>Estado</th>
+                        <th>Justificacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex flex-column align-items-end">
+            <button class="btn btn-actions"><i class="fas fa-check"></i></button>
+            <button class="btn btn-actions"><i class="fas fa-times"></i></button>
+            <button class="btn btn-actions"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
