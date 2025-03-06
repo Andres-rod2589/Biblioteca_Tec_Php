@@ -1,9 +1,10 @@
 $(document).ready(() => {
+    // Valida el campo de entrada del título
     $('#titulo').on('keyup', () => {
         let inputTitulo = $('#titulo').val();
         const validacionLetras = /^[a-zA-ZáéíóúÁÉÍÓÚ\s0-9¡!¿?,]*$/;
 
-        if (inputTitulo.trim() == "") { //EL CAMPO NO DEBE ESTAR VACIO
+        if (inputTitulo.trim() == "") { // El campo no debe estar vacío
             $('#tituloError').text('Campo obligatorrio');
         } else if (validacionLetras.test(inputTitulo)) {
             $('#tituloError').text('');
@@ -13,11 +14,12 @@ $(document).ready(() => {
         verificarCampos();
     });
 
+    // Valida el campo de entrada del código del libro
     $('#codigoLibro').on('keyup', () => {
         let inputValor = $('#codigoLibro').val();
         const validacionCodigo = /^[0-9]*$/;
 
-        if (inputValor.trim() == "") {
+        if (inputValor.trim() == "") { // El campo no debe estar vacío
             $('#codigoLibroError').text('Campo obligatorio');
         } else if (!validacionCodigo.test(inputValor)) {
             $('#codigoLibroError').text('Solo numeros');
@@ -31,9 +33,10 @@ $(document).ready(() => {
         verificarCampos();
     });
 
+    // Valida el campo de selección de autores
     $('#mostrarAutores').on('change', () => {
         let seleccion = $('#mostrarAutores').val();
-        if (seleccion == "") { 
+        if (seleccion == "") { // El campo no debe estar vacío
             $('#mostrarAutoresError').text('Selecciona el autor');
         } else {
             $('#mostrarAutoresError').text('');
@@ -41,9 +44,10 @@ $(document).ready(() => {
         verificarCampos()
     });
 
+    // Valida el campo de selección de categorías
     $('#categorias').on('change', () => {
         let seleccion = $('#categorias').val();
-        if (seleccion == "") { 
+        if (seleccion == "") { // El campo no debe estar vacío
             $('#categoriasError').text('Selecciona la categoria.');
         } else {
             $('#categoriasError').text('');
@@ -51,6 +55,7 @@ $(document).ready(() => {
         verificarCampos();
     });
 
+    // Validación inicial para los campos de selección de autores y categorías
     let seleccion = $('#mostrarAutores, #categorias').val();
     if (seleccion == "") {
         $('#mostrarAutoresError, #categoriasError').text('Selecciona correctamente');
@@ -61,16 +66,16 @@ $(document).ready(() => {
     MostrarDatosTabla();
 })
 
-//VERIFICAR TODOS LOS CAMPOS PARA QUE NO TENGAN LOS TEXTOS DE ERROR
+// Verifica que no haya mensajes de error en ningún campo
 const verificarCampos = () => {
-    //Se verifica que no se tenga un mensaje de error 
     if ($('#tituloError').text() || $('#codigoLibroError').text() || $('#mostrarAutoresError').text() || $('#categoriasError').text()) {
-        $('#guardar').prop('disabled', true); //desactiva el botón guardar mientras haya errores.
+        $('#guardar').prop('disabled', true); // Desactiva el botón de guardar si hay errores
     } else {
         $('#guardar').prop('disabled', false);
     }
 };
 
+// Obtiene y muestra los autores en el campo de selección
 const mostrarAutorSelect = () => {
     $.ajax({
         url: "../Controller/LibrosControlador.php",
@@ -93,6 +98,7 @@ const mostrarAutorSelect = () => {
     });
 };
 
+// Recoge los datos del libro de los campos de entrada en un diccionario
 const guardarLibrosDiccionario = () => {
     let titulo = $('#titulo').val();
     let isbn = $('#codigoLibro').val();
@@ -108,23 +114,23 @@ const guardarLibrosDiccionario = () => {
     return guardarLibros;
 }
 
-//TABLA-----------------------------------
+// Maneja el evento de clic del botón de guardar para guardar los datos del libro
 $('#guardar').on('click', () => {
     let datos = guardarLibrosDiccionario();
     MostrarDatosTabla();
     $.ajax({
-        url: "../Controller/LibrosControlador.php", //URL, DOMINIO, SERVIDOR
-        method: "POST", // VA A HACER PRIVADO EL METODO DE VIAJE: POST , GET, PUT, DELETE
-        data: { peticion: "Insertar_Libros", paquete: datos }, //PAQUETES DE DATOS
-        dataType: "json", //DE QUE TIPO ES EL PAQUETE
-        success: function (respuesta) { //ESTO ES LA RESPUESTA
+        url: "../Controller/LibrosControlador.php", // URL, dominio, servidor
+        method: "POST", // Método HTTP: POST, GET, PUT, DELETE
+        data: { peticion: "Insertar_Libros", paquete: datos }, // Paquete de datos
+        dataType: "json", // Tipo de datos
+        success: function (respuesta) { // Manejador de respuesta
             Swal.fire(
                 respuesta.estado ? '¡Éxito!' : '¡Error!',
                 respuesta.MSG,
                 respuesta.estado ? 'success' : 'error'
             );
             if (respuesta.estado) { 
-                MostrarDatosTabla(); // Mostrara los datos recien agragados si la insercion fue correcta sin necesidad de recargar la pagina
+                MostrarDatosTabla(); // Refresca la tabla con los nuevos datos si la inserción fue exitosa
             }
             $('#guardarModal').modal('hide');
         },
@@ -147,15 +153,17 @@ $('#guardar').on('click', () => {
     verificarCampos();
 });
 
-//-------------------------------------------------BOTONES DE LAS ACCIONES DE LA TABLA "actualizar" "eliminar"------------------
+// Genera el botón de eliminar para cada fila en la tabla
 const BtnEliminar = (isbn) => {
     return `<button class="btn btn-danger" onclick="eliminarLibro('${isbn}')">Eliminar</button>`;
 };
 
+// Genera el botón de actualizar para cada fila en la tabla
 const BtnActualizar = () => {
     return '<button class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalActualizar">Actualizar</button>';
 };
 
+// Maneja la acción de eliminar un libro
 const eliminarLibro = (isbn) => {
     console.log(isbn)
     Swal.fire({
@@ -180,7 +188,7 @@ const eliminarLibro = (isbn) => {
                         respuesta.estado ? 'success' : 'error'
                     );
                     if (respuesta.estado) {
-                        MostrarDatosTabla(); // Actualiza la tabla después de eliminar
+                        MostrarDatosTabla(); // Refresca la tabla después de eliminar
                     }
                 },
                 error: function (xhr, status, error) {
@@ -196,7 +204,7 @@ const eliminarLibro = (isbn) => {
     });
 };
 
-//--------------------------------------FUNCION PARA CREAR UNA FILA DE LA TABLA------------------------
+// Crea una fila de tabla para cada libro
 const FilasTablaLibros = (libros) => {
     return `
         <tr>
@@ -209,9 +217,9 @@ const FilasTablaLibros = (libros) => {
         </tr>`;
 };
 
-//--------------------------------------FUNCION PARA MOSTRAR DATOS EN LA TABLA------------------------
+// Obtiene y muestra los datos de los libros en la tabla
 const MostrarDatosTabla = () => {
-    $('#mostrarLibros').empty(); // Limpia las filas si es que llegan a duplicar
+    $('#mostrarLibros').empty(); // Limpia las filas de la tabla para evitar duplicados
 
     $.ajax({
         url: "../Controller/LibrosControlador.php", 
@@ -234,7 +242,7 @@ const MostrarDatosTabla = () => {
     });
 };
 
-//------Mostrar datos en la tabla de autores en el modal de actualizar
+// Maneja el evento de clic del botón de actualizar para llenar el modal de actualización con los datos del libro
 $(document).on('click', '.btn-actualizar', (event) => {
     const btn = event.currentTarget;
     let fila = $(btn).closest('tr');
@@ -244,7 +252,7 @@ $(document).on('click', '.btn-actualizar', (event) => {
     let categoria = fila.find('td:nth-child(3)').text();
     let autorNombre = fila.find('td:nth-child(4)').text().trim();
 
-    // LLENANDO LOS INPUTS DEL MODAL
+    // Llena los campos de entrada del modal de actualización
     $('#tituloActualizar').val(titulo);
     $('#codigoLibroActualizar').val(isbn);
     $('#categoriasActualizar').val(categoria);
@@ -259,7 +267,7 @@ $(document).on('click', '.btn-actualizar', (event) => {
     $('#codigoLibro').val(isbn);
 });
 
-// Función para actualizar los datos del libro
+// Maneja el evento de clic del botón de guardar para actualizar los datos del libro
 $('#guardarActualizar').on('click', () => {
     let datos = {
         titulo: $('#tituloActualizar').val(),
@@ -281,7 +289,7 @@ $('#guardarActualizar').on('click', () => {
                 respuesta.estado ? 'success' : 'error'
             );
             if (respuesta.estado) {
-                MostrarDatosTabla(); // Actualiza la tabla con los datos actualizados
+                MostrarDatosTabla(); // Refresca la tabla con los datos actualizados
             }
             $('#modalActualizar').modal('hide');
         },

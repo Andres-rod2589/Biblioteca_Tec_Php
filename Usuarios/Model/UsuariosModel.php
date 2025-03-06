@@ -46,8 +46,20 @@ class UsuariosModel extends DatabaseDB{
         return $result ? $result['id_usuario'] : null;
     }
 
+    // Consultar usuarios y llenar la tabla
+    public function ConsultarUsuarios() {
+        try {
+            $sql = "SELECT nombre, ap_paterno, ap_materno, telefono, calle, n_exterior, n_interior, cp FROM usuario";
+            $execute = $this->conectarDBPHP()->query($sql);
+            $respuesta = $execute->fetchAll(PDO::FETCH_ASSOC); // Convierte la tabla en un array asociativo (clave-valor)
+            return ["estado" => true, "Usuarios" => $respuesta];
+        } catch (Exception $e) {
+            return ["estado" => false, "Error capturada" => $e->getMessage()];
+        }
+    }
+
     //Insertar datos pero que si ese usuario ya esxiste que no lo haga y si no exxiste.
-//INSERTAR  UN NUEVO AUTOR
+//INSERTAR  UN NUEVO Usuario
     public function InsertarUsuarios(){
         try{
             if ($this->getIdUsuarios() > 0){
