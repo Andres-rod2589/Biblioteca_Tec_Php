@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Assets/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Assets/css/cssAutores.css">
+    <title>Libros</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../../Libros/View/LibrosView.html">BIBLIOTECA</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="PrestamosView.html">Prestamos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Autores/View/AutoresView.html">Autores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Usuarios/View/UsuariosView.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2 style="text-align: center;">Prestamos</h2>
+      <!-- Centered Button -->
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardarPrestamos">
+          Prestamos de Libros
+        </button>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="guardarPrestamos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Prestamos de Libros</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" class="container">
+                <div class="row">
+                  <div class="col-md-6 mt-5">
+                    <!--Codigo_Ejemplar-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="codigoEjemplar" class="col-sm-4 col-form-label">Codigo Ejemplar: </label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="codigoEjemplar" name="codigoEjemplar" required>
+                          <small id="codigoEjemplarError" class="error"></small>
+                      </div>
+                    </div>
+  
+                    <!--Nombre del libro-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarLibros" class="col-sm-4 col-form-label">Libros:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarLibros" name="mostrarLibros" required>
+                              <option selected value="">Selecciona el libro</option>
+                          </select>
+                          <small id="mostrarLibrosError" class="error text-danger"></small>
+                      </div>
+                    </div>
+  
+                    <!--Nombre del Usuario-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarUsuarios" class="col-sm-4 col-form-label">Usuario:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarUsuarios" name="mostrarUsuarios" required>
+                              <option selected value="">Selecciona el Usuario</option>
+                          </select>
+                          <small id="mostrarUsuariosError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--ESTADO DELL LIBRO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="estadoLibro" class="col-sm-4 col-form-label">Estado del libro: </label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="estadoLibro" name="estadoLibro" required>
+                          <small id="estadoLibroError" class="error"></small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-5">
+                    <!--FECHA DE PRESTAMO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaPrestamos" class="col-sm-4 col-form-label">Fecha Prestamos: </label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaPrestamos" name="fechaPrestamos" required>
+                          <small id="fechaPrestamosError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--FECHA DE DECVOLUCIONES-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaDevolucion" class="col-sm-4 col-form-label">Fecha Devolución: </label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaDevolucion" name="fechaDevolucion" required>
+                          <small id="fechaDevolucionError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--OBSERVACIONES DEL LIBRO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="Observaciones" class="col-sm-4 col-form-label">Observaciones: </label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="Observaciones" name="Observaciones" required>
+                          <small id="ObservacionesError" class="error"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="guardar">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centered Search Bar -->
+      <div class="row mb-3 align-items-center mt-5 text-center">
+        <label for="buscador" class="col-sm-12 col-form-label">Buscador:</label>
+        <div class="col-sm-3 mx-auto">
+            <input type="text" class="form-control" id="buscador" name="buscador" placeholder="Buscar">
+            <small id="buscadorError" class="error"></small>
+        </div>
+      </div>
+      
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Libro</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Fecha Prestamo</th>
+            <th scope="col">Fecha Devolución</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Obsevaciones</th>
+            <th colspan="2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="mostrar">
+            <tr>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="../../Assets/JQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../Assets/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../JsPrestamos/JsPrestamos.js"></script>
+</body>
+</html>

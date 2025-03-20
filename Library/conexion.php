@@ -18,12 +18,4 @@ class DatabaseDB{
         }
     }
 }
-// al hacer la instancia de la clase invoco autmaticamnete el constructor que son los parentesis ()
-//$connexion = new DatabaseDB();
-//print_r($connexion);
-
-//HACER PLANAS DE () 
-//() esto es un constructor 10 veces
-
-//Hacer lo mismo en Pyhton Pero en POO
 ?>

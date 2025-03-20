@@ -17,10 +17,10 @@ class LibrosController extends LibrosModel{
                 return $this->MostrarLibros();
             case 'Insertar_Libros':
                 return $this->AgregarLibros();
-            case 'Actualizar_Libros': // Añadir este caso
+            case 'Actualizar_Libros':
                 return $this->ActualizarLibros();
             case 'Eliminar_Libros':
-                return $this->EliminarLibros();
+                return $this->EliminarLosLibros();
             default:
                 return convertidorJSON(["estado" => False, "MSG" => "Peticion desconocida"]);
         }
@@ -60,21 +60,27 @@ class LibrosController extends LibrosModel{
         return convertidorJSON($respuesta);
     }
 
-    // Añadir este método
     public function ActualizarLibros() {
-        $resultado = $this->EditarLibros(); // Cambiar el nombre del método llamado
+        $resultado = $this->EditarLibros();
+        
         if ($resultado["estado"]) {
             $respuesta = ["estado" => true, "MSG" => "Libro actualizado correctamente", "Actualizado" => $resultado['Actualizado']];
+        } elseif ($resultado["estado"] ) {
+            $respuesta = ["estado" => false, "MSG" => $resultado['MSG']];
+        } elseif ($resultado["noEncontrado"]) {
+            $respuesta = ["estado" => false, "MSG" => $resultado['noEncontrado']];
         } elseif ($resultado['Error capturada']) {
             $respuesta = ["estado" => false, "MSG" => "Error al actualizar el libro", "Error" => $resultado['Error capturada']];
         } else {
             $respuesta = ["estado" => false, "MSG" => "Error de otro planeta"];
         }
+    
         return convertidorJSON($respuesta);
     }
 
-    public function EliminarLibros() {
-        $resultado = $this->EliminarLibro();
+    public function EliminarLosLibros() {
+        $resultado = $this->EliminarLibrp();
+        
         if ($resultado["estado"]) {
             $respuesta = ["estado" => true, "MSG" => "Libro eliminado correctamente", "Eliminado" => $resultado['Eliminado']];
         } elseif (isset($resultado["MSG"])) {
@@ -84,13 +90,15 @@ class LibrosController extends LibrosModel{
         } else {
             $respuesta = ["estado" => false, "MSG" => "Error de otro planeta"];
         }
+        
         return convertidorJSON($respuesta);
     }
+
 }
 
 $peticion = $_POST['peticion'] ?? null;
 $paquete = $_POST['paquete'] ?? null;
 
 $objLibros = new LibrosController($peticion, $paquete);
-echo $objLibros->Peticiones();
+$objLibros->Peticiones();
 ?>

@@ -28,16 +28,17 @@ $('#modalActualizar').on('shown.bs.modal', function () {
     // Usamos .attr() para asignar de manera más directa los atributos aria-hidden, aria-modal y role
     $('#modalActualizar').attr('aria-hidden', 'false')  // Asegura que el modal es visible
                     .attr('aria-modal', 'true')      // Indica que es un modal
-                    .attr('role', 'dialog');        // Define el rol del modal como un diálogo
+                    .attr('role', 'dialog');
 });
 
 // Al cerrar el modal restablecemos los atributos y eliminamos el fondo del modal
 $('#modalActualizar').on('hidden.bs.modal', function () {
-    // Restablecemos el atributo aria-hidden a 'true' y eliminamos aria-modal
-    $('#modalActualizar').attr('aria-hidden', 'true').removeAttr('aria-modal');
-    // Eliminamos el fondo de la pantalla (backdrop) al cerrar el modal
-    $('.modal-backdrop').remove();
+    $('#codigo_autor').val('');
+    $('.modal-backdrop').remove(); // Elimina manualmente el fondo opaco
+    $('body').removeClass('modal-open').css('overflow', 'auto'); // Restaura el scroll
 });
+
+
 
 
 //---------------------------------------------APARTADO PARA VALIDAR QUE LOS CAMPOS SEAN CORRECTOS-------------------------------------------------------------
@@ -109,6 +110,7 @@ const actualizarAutorDiccionario = () => {
 
 $('#guardarActualizar').on('click', function () {
     let datos = actualizarAutorDiccionario();
+    console.log(datos)
     MostrarDatosTabla();
 
     $.ajax({
@@ -123,6 +125,8 @@ $('#guardarActualizar').on('click', function () {
                 respuesta.estado ? 'success' : 'error'
             );
             if (respuesta.estado) {
+                $('#modalActualizar').modal('hide'); 
+                $('#codigo_autor').val('');
                 MostrarDatosTabla();
             }
         },

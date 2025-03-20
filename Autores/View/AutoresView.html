@@ -10,30 +10,29 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Biblioteca</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../../Libros/View/LibrosView.html">Libros</a></li>
-                            <li><a class="dropdown-item" href="../../Usuarios/View/UsuariosView.html">Usuarios</a></li>
-                            <li><a class="dropdown-item" href="../../Autores/View/AutoresView.html">Autores</a></li>
-                            <li><a class="dropdown-item" href="#">Prestamos</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="../../Libros/View/LibrosView.html">BIBLIOTECA</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="AutoresView.html">Autores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Usuarios/View/UsuariosView.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Prestamos/View/PrestamosView.html">Prestamos</a>
+              </li>
+            </ul>
+          </div>
         </div>
     </nav>
+
     <div class="container mt-5">
         <h2 style="text-align: center;">Insertar Autores</h2>
         <form method="post" class="container">
@@ -117,26 +116,31 @@
             </div>
         </form>
 
-        <div class="text-center mt-4">
-            <input type="text" class="form-control w-50 mx-auto" id="buscador" name="buscador" placeholder="Buscar autor">
+        <!--APARTADO DE BUSQUEDA-->
+        <div class="row mb-3 align-items-center mt-5">
+            <label for="buscador" class="col-sm-12 col-form-label">Buscador:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="buscador" name="buscador" placeholder="Buscar">
+                <small id="buscadorError" class="error"></small>
+            </div>
         </div>
 
-        <table class="table mt-5">
+        <table class="table bg-light mt-5">
             <thead>
-                <tr>
+              <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido Paterno</th>
                 <th scope="col">Apellido Materno</th>
                 <th scope="col">Nacionalidad</th>
                 <th scope="col">Codigo</th>
-                <th scope="col">Acciones</th>
-                </tr>
+                <th colspan="2">Acciones</th>
+              </tr>
             </thead>
             <tbody id="mostrar">
                 <tr>
                 </tr>
             </tbody>
-            </table>
+        </table>
     </div>
 
 
@@ -145,7 +149,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Actualizar Datos del Autor</h5>
+                    <h5 class="modal-title" id="modalLabel">Editar Autor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -211,7 +215,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" id="guardarActualizar">Guardar Cambios</button>
+                    <button type="button" class="btn btn-success" id="guardarActualizar">Actualizar</button>
                 </div>
             </div>
         </div>

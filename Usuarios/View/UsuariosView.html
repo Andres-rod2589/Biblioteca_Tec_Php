@@ -8,44 +8,44 @@
     <title>Usuarios</title>
 </head>
 <body>
-    <!-- Menú desplegable -->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Biblioteca</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../../Libros/View/LibrosView.html">Libros</a></li>
-                            <li><a class="dropdown-item" href="../../Usuarios/View/UsuariosView.html">Usuarios</a></li>
-                            <li><a class="dropdown-item" href="../../Autores/View/AutoresView.html">Autores</a></li>
-                            <li><a class="dropdown-item" href="#">Prestamos</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="LibrosView.html">BIBLIOTECA</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="UsuariosView.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Autores/View/AutoresView.html">Autores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Prestamos/View/PrestamosView.html">Prestamos</a>
+              </li>
+            </ul>
+          </div>
         </div>
     </nav>
 
     <div class="container mt-5">
-        <h2 style="text-align: center;">Insertar Usuarios</h2>
-        <!-- Boton de guardar-->
+        <h2 style="text-align: center;">Usuarios</h2>
+        <!-- Centered Button -->
         <div class="text-center">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardarModal">
-                Agregar Usuario
+                Agregar Usuarios
             </button>
         </div>
+
+        <!-- Modal GUARDAR -->
         <div class="modal fade" id="guardarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Usuarios</h5>
@@ -53,75 +53,55 @@
                     </div>
                     <div class="modal-body">
                         <form method="post" class="container">
+                            <!-- Single Column Layout -->
                             <div class="row">
-                                <!-- Campo Nombre -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="nombre" class="col-sm-4 col-form-label">Nombre:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <div class="col-md-12">
+                                    <!-- Campo Nombre -->
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre:</label>
+                                        <input type="text" class="form-control eventos" id="nombre" name="nombre" required>
                                         <small id="nombreError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo Apellido Paterno -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="ap_paterno" class="col-sm-4 col-form-label">Apellido Paterno:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="ap_paterno" name="ap_paterno" required>
+                                    <!-- Campo Apellido Paterno -->
+                                    <div class="mb-3">
+                                        <label for="ap_paterno" class="form-label">Apellido Paterno:</label>
+                                        <input type="text" class="form-control eventos" id="ap_paterno" name="ap_paterno" required>
                                         <small id="ap_paternoError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo Apellido Materno -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="ap_materno" class="col-sm-4 col-form-label">Apellido Materno:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="ap_materno" name="ap_materno" required>
+                                    <!-- Campo Apellido Materno -->
+                                    <div class="mb-3">
+                                        <label for="ap_materno" class="form-label">Apellido Materno:</label>
+                                        <input type="text" class="form-control eventos" id="ap_materno" name="ap_materno" required>
                                         <small id="ap_maternoError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo Telefono -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="telefono" class="col-sm-4 col-form-label">Telefono:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                    <!-- Campo Telefono -->
+                                    <div class="mb-3">
+                                        <label for="telefono" class="form-label">Telefono:</label>
+                                        <input type="text" class="form-control eventos" id="telefono" name="telefono" required>
                                         <small id="telefonoError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo Calle -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="calle" class="col-sm-4 col-form-label">Calle:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="calle" name="calle" required>
+                                    <!-- Campo Calle -->
+                                    <div class="mb-3">
+                                        <label for="calle" class="form-label">Calle:</label>
+                                        <input type="text" class="form-control eventos" id="calle" name="calle" required>
                                         <small id="calleError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo N_exterior -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="n_exterior" class="col-sm-4 col-form-label">N_exterior:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="n_exterior" name="n_exterior" required>
+                                    <!-- Campo Numero Exterior -->
+                                    <div class="mb-3">
+                                        <label for="n_exterior" class="form-label">Numero exterior:</label>
+                                        <input type="text" class="form-control eventos" id="n_exterior" name="n_exterior" required placeholder="numeros o 00">
                                         <small id="n_exteriorError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo N_interior -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="n_interior" class="col-sm-4 col-form-label">N_interior:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="n_interior" name="n_interior" required>
+                                    <!-- Campo Numero Interior -->
+                                    <div class="mb-3">
+                                        <label for="n_interior" class="form-label">Numero interior:</label>
+                                        <input type="text" class="form-control eventos" id="n_interior" name="n_interior" required placeholder="numeros o 00">
                                         <small id="n_interiorError" class="error"></small>
                                     </div>
-                                </div>
-
-                                <!-- Campo Cp -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="cp" class="col-sm-4 col-form-label">Cp:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="cp" name="cp" required>
+                                    <!-- Campo Codigo Postal -->
+                                    <div class="mb-3">
+                                        <label for="cp" class="form-label">Codigo Postal:</label>
+                                        <input type="text" class="form-control eventos" id="cp" name="cp" minlength="5" maxlength="5" required>
                                         <small id="cpError" class="error"></small>
                                     </div>
                                 </div>
@@ -130,15 +110,24 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="guardar">Agregar</button>
+                        <button type="button" class="btn btn-primary" id="guardar" disabled>Agregar</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Centered Search Bar -->
+        <div class="row mb-3 align-items-center mt-5 text-center">
+            <label for="buscador" class="col-sm-12 col-form-label">Buscador:</label>
+            <div class="col-sm-3 mx-auto">
+                <input type="text" class="form-control" id="buscador" name="buscador" placeholder="Buscar">
+                <small id="buscadorError" class="error"></small>
             </div>
         </div>
                 
         <table class="table mt-5">
             <thead>
-            <tr>
+              <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido Paterno</th>
                 <th scope="col">Apellido Materno</th>
@@ -147,93 +136,101 @@
                 <th scope="col">N_Exterior</th>
                 <th scope="col">N_Interior</th>
                 <th scope="col">Cp</th>
+                <th scope="col">Codigo</th>
                 <th colspan="2">Acciones</th>
-            </tr>
+              </tr>
             </thead>
-            <tbody id="mostrarUsuarios">
+            <tbody id="mostrar">
                 <tr>
                 </tr>
             </tbody>
         </table>
+
         <!-- Modal ACTUALIZAR-->
         <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Usuarios</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Actualizar Libros</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="formActualizar" method="post" class="container">
+                            <input type="hidden" class="form-control eventos" id="codigoUsuario" name="codigoUsuario" minlength="5" maxlength="5" required>
                             <div class="row">
-                                <!-- Campo Nombre -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="nombreActualizar" class="col-sm-4 col-form-label">Nombre:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="nombreActualizar" name="nombreActualizar" required>
-                                        <small id="nombreActualizarError" class="error"></small>
+                                <!-- Primera columna -->
+                                <div class="col-md-6 mt-5">
+                                    <!-- Campo Nombre -->
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="nombreActualizar" class="col-sm-4 col-form-label">Nombre:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos " id="nombreActualizar" name="nombreActualizar" required>
+                                            <small id="nombreActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Campo Apellido Paterno -->
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="apPaternoActualizar" class="col-sm-4 col-form-label">Apellido Paterno:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="apPaternoActualizar" name="apPaternoActualizar" required>
+                                            <small id="apPaternoActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Campo Apellido Materno -->
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="apMaternoActualizar" class="col-sm-4 col-form-label">Apellido Materno:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="apMaternoActualizar" name="apMaternoActualizar" required>
+                                            <small id="apMaternoActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="telefonoActualizar" class="col-sm-4 col-form-label">Telefono:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="telefonoActualizar" name="telefonoActualizar" required>
+                                            <small id="TelefonoActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="calleActualizar" class="col-sm-4 col-form-label">Calle:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="calleActualizar" name="calleActualizar" required>
+                                            <small id="calleActualizarError" class="error"></small>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Campo Apellido Paterno -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="ap_paternoActualizar" class="col-sm-4 col-form-label">Apellido Paterno:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="ap_paternoActualizar" name="ap_paternoActualizar" required>
-                                        <small id="ap_paternoActualizarError" class="error"></small>
+                
+                
+                                <div class="col-md-6 mt-5">
+                
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="num_exteriorActualizar" class="col-sm-4 col-form-label">Numero exterior:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="num_exteriorActualizar" name="num_exteriorActualizar" required  placeholder="numeros o 00">
+                                            <small id="n_exteriorActualizarError" class="error"></small>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="num_interiorActualizar" class="col-sm-4 col-form-label">Numero interior:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="num_interiorActualizar" name="num_interiorActualizar" required placeholder="numeros o 00">
+                                            <small id="n_interiorActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="cpActualizar" class="col-sm-4 col-form-label">Codigo Postal:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control eventos" id="cpActualizar" name="cpActualizar" minlength="5" maxlength="5" required>
+                                            <small id="cpActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
 
-                                <!-- Campo Apellido Materno -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="ap_maternoActualizar" class="col-sm-4 col-form-label">Apellido Materno:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="ap_maternoActualizar" name="ap_maternoActualizar" required>
-                                        <small id="ap_maternoActualizarError" class="error"></small>
-                                    </div>
-                                </div>
-
-                                <!-- Campo Telefono -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="telefonoActualizar" class="col-sm-4 col-form-label">Telefono:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="telefonoActualizar" name="telefonoActualizar" required>
-                                        <small id="telefonoActualizarError" class="error"></small>
-                                    </div>
-                                </div>
-
-                                <!-- Campo Calle -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="calleActualizar" class="col-sm-4 col-form-label">Calle:</label>
-                                    <div class="col-sm-8"></div>
-                                        <input type="text" class="form-control" id="calleActualizar" name="calleActualizar" required>
-                                        <small id="calleActualizarError" class="error"></small>
-                                    </div>
-                                </div>
-
-                                <!-- Campo N_exterior -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="n_exteriorActualizar" class="col-sm-4 col-form-label">N_exterior:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="n_exteriorActualizar" name="n_exteriorActualizar" required>
-                                        <small id="n_exteriorActualizarError" class="error"></small>
-                                    </div>
-                                </div>
-
-                                <!-- Campo N_interior -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="n_interiorActualizar" class="col-sm-4 col-form-label">N_interior:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="n_interiorActualizar" name="n_interiorActualizar" required>
-                                        <small id="n_interiorActualizarError" class="error"></small>
-                                    </div>
-                                </div>
-
-                                <!-- Campo Cp -->
-                                <div class="row mb-3 align-items-center">
-                                    <label for="cpActualizar" class="col-sm-4 col-form-label">Cp:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="cpActualizar" name="cpActualizar" required>
-                                        <small id="cpActualizarError" class="error"></small>
+                                    <div>
+                                        <input type="hidden" class="form-control" id="codigoActualizar">
                                     </div>
                                 </div>
                             </div>
@@ -241,16 +238,16 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="guardarActualizar">Guardar Cambios</button>
+                        <button type="button" class="btn btn-success"  id="guardarActualizar">Actualizar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <script src="../../Assets/JQuery/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../Assets/Bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="../js/JsUsuarios.js"></script>
+    <script type="module" src="../js/usuarios.js"></script>
 </body>
 </html>

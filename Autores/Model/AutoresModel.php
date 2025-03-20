@@ -114,36 +114,31 @@ public function EditarAutor() {
     }
 }
 
-    //HACER EL DE ELIMINAR
-//ELIMNAR UN AUTOR
-    public function EliminarAutor() {
-        $id_autor = $this->getIdAutores();
-        if ($id_autor) {
-            $sql = "DELETE FROM autores WHERE id_autor = :id_autor";
+// ELIMINAR UN AUTOR
+public function EliminarAutor() {
+    try {
+        if ($this->codigo) {
+            $sql = "DELETE FROM autores WHERE codigoAutor = :codigo";
             $execute = $this->conectarDBPHP()->prepare($sql);
-            $arrayValues = [':id_autor' => $id_autor];
-            
+            $arrayValues = [
+                ':codigo' => $this->codigo
+            ];
+    
             $execute->execute($arrayValues);
             $resul = $execute->rowCount();
             $execute->closeCursor();
-    
-            return 'Autor eliminado con éxito';
+            
+            if ($resul > 0) {
+                return ['estado' => true, 'Eliminado' => $resul]; 
+            } else {
+                return ['estado' => false, 'MSG' => 'No se encontro el autor'];
+            }
         } else {
-            return 'Autor no encontrado en la base de datos';
+            return ['estado' => false, 'MSG' => 'codigo no valido'];
         }
+    } catch (Exception $e) {
+        return ['estado' => false, 'Error' => $e->getMessage()];
     }
-    
+}   
 }
-
-//$objAutores = new AutoresModel(nombre: 'Ana',apellido_p: 'Guevara',apellido_m: 'Islas',nacionalidad: 'Mexicana',codigo: 'A05',codigoNuevo: 'A05');
-//$autores = $objAutores->ConsultarAutores();
-//print_r($autores[1]["a_materno"]);//Aqui traemos
-//$result = $objAutores->EditarAutor('Marimar', 'Gomez', 'Bonilla', 'Brasil');
-//$result = $objAutores->EditarAutor();
-//print_r($autores );
-
-
-
-//$ID = $objAutores->getIdAutores();
-//print_r($ID)
 ?>

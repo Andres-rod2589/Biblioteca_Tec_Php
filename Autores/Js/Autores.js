@@ -75,7 +75,7 @@ const guardarAutorDiccionario = () => {
         "nacionalidad": nacionalidad,
         "codigo_autor": codigoAutor
     };
-    return guardarAutor
+    return guardarAutor;
 };
 
 //-----------------------------------APARTADO PARA MOSTRAR LOS DATOS A LA TABLA Y BOTONES DE ELIMINAR Y ACTUALIZAR-----------------------------------
@@ -119,10 +119,9 @@ $('#guardar').on('click', () => {
 });
 
 //-------------------------------------------------BOTONES DE LAS ACCIONES DE LA TABLA "actualizar" "eliminar"------------------
-const BtnEliminar = () => {
-    let eliminar = '<button class="btn btn-danger">Eliminar</button>';
-    return eliminar; 
-}
+const BtnEliminar = (codigoAutor) => {
+    return `<button class="btn btn-danger" onclick="eliminarAutor('${codigoAutor}')">Eliminar</button>`;
+};
 
 const BtnActualizar = () => {
     return '<button class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalActualizar">Actualizar</button>';
@@ -138,7 +137,7 @@ const FilasTablaAutores = (autor) => {
             <td>${autor.nacionalidad}</td>
             <td>${autor.codigoAutor}</td>
             <td>${BtnActualizar()}</td>
-            <td>${BtnEliminar()}</td>
+            <td>${BtnEliminar(autor.codigoAutor)}</td>
         </tr>`;
 };
 
@@ -165,21 +164,51 @@ const MostrarDatosTabla = () => {
             'Intentalo más tarde';
         }
     });
-};//--------------------------------------BUSCADOR ------------------------
+};
+
+const eliminarAutor = (codigoAutor) => {
+    $.ajax({
+        url: "../Controller/AutoresController.php",
+        method: "POST",
+        data: { peticion: "Eliminar_Autores", paquete: { codigo_autor: codigoAutor } },
+        dataType: "json",
+        success: function (respuesta) {
+            Swal.fire(
+                respuesta.estado ? '¡Éxito!' : '¡Error!',
+                respuesta.estado ? 'Autor eliminado correctamente' : respuesta.MSG,
+                respuesta.estado ? 'success' : 'error'
+            );
+            if (respuesta.estado) {
+                MostrarDatosTabla();
+            }
+        },
+        error: function (err) {
+            Swal.fire('Error', 'No se pudo eliminar el autor', 'error');
+        }
+    });
+};
+
+//------------------------------------------------------APARTADO DE BUSQUEDA-----------------------------------------------------
 $('#buscador').on('keyup', () => {
-    let buscarTexto = $('#buscador').val().toLowerCase(); // Obtiene el valor del input y lo convierte a minusculas
+    let buscarTexto = $('#buscador').val(); // Obtiene lo que el usuario escribe
     console.log("Texto buscado:", buscarTexto); 
 
-    $('#mostrar tr').each((index, tabla) => { // Se itera cada fila que tiene la tabla con each de JQuery
-        let textoTabla = $(tabla).text().toLowerCase(); // Obtiene el texto de la fila y lo convierte a minusculas
-        console.log("Conforme a:", textoTabla);
+    $('#mostrar tr').each(function () { // Se itera cada fila que tiene la tabla con each de JQuery
+        let textoTabla = $(this).text(); // Obtiene el texto de la fila pero por separado, por concepto
 
         if (textoTabla.includes(buscarTexto)) { // Si el texto de la fila contiene lo que escribi
-            $(tabla).show(); // Muestra la fila, show hace que el elmento sea visible
-            console.log("Mostrando datos correspondientes:");
+            $(this).show(); // Muestra la fila, show hace que el elmento sea visible
         } else {
-            $(tabla).hide(); // Si no, oculta la fila, hide hace que los elementos se oculten
-            console.log("Datos no correspondientes:");
+            $(this).hide(); // Si no, oculta la fila, hide hace que los elementos se oculten
         }
     });
 });
+
+
+//El método includes() en JavaScript se usa para verificar si una cadena de texto contiene una subcadena específica. 
+//     cadena.includes(subcadena)
+//Asi que compara el texto de cada fila de la tabla con lo que escribo en el input de buscar.
+
+
+
+

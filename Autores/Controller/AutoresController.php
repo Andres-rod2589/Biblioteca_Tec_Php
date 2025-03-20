@@ -19,6 +19,8 @@ class AutoresController extends AutoresModel{
                 return $this->AgregarAutores();
             case 'Actualizar_Autores':
                 return $this->ActualizarAutores();
+            case 'Eliminar_Autores':
+                return $this->EliminarLosAutores();
             default:
                 return convertidorJSON(["estado" => False, "MSG" => "Peticion desconocida"]);
         }
@@ -65,6 +67,25 @@ class AutoresController extends AutoresModel{
     
         return convertidorJSON($respuesta);
     }
+
+    public function EliminarLosAutores() {
+        $resultado = $this->EliminarAutor();
+        
+        // Asegúrate de que la clave 'MSG' esté definida antes de acceder
+        if ($resultado["estado"]) {
+            $respuesta = ["estado" => true, "MSG" => "Autor eliminado correctamente", "Eliminado" => $resultado['Eliminado']];
+        } elseif (isset($resultado["MSG"])) {
+            $respuesta = ["estado" => false, "MSG" => $resultado['MSG']];
+        } elseif (isset($resultado['Error'])) {
+            $respuesta = ["estado" => false, "MSG" => "Error al eliminar el autor", "Error" => $resultado['Error']];
+        } else {
+            $respuesta = ["estado" => false, "MSG" => "Error de otro planeta"];
+        }
+        
+        return convertidorJSON($respuesta);
+    }
+    
+    
 }
 
 $peticion = $_POST['peticion'] ?? null;
