@@ -36,15 +36,26 @@ class LibrosController extends LibrosModel{
         return convertidorJSON($respuesta);
     }
 
-    public function MostrarLibros(){
+    public function MostrarLibros() {
         $mostrar = $this->ConsultarLibros();
-        if($mostrar["estado"]){
-            $respuesta = ["estado" => true, "MSG" => "Libros encontrados", "datos" => $mostrar["Libros"]];
-        }else{
-            $respuesta = ["estado" => false, "MSG" => "Libros no encontrados", "error" => $mostrar["Error capturada"]];
+    
+        if ($mostrar["estado"]) {
+            $respuesta = [
+                "estado" => true,
+                "MSG" => "Libros encontrados",
+                "datos" => $mostrar["libros"] // Corregido: "libros" en minúsculas
+            ];
+        } else {
+            $respuesta = [
+                "estado" => false,
+                "MSG" => "Libros no encontrados",
+                "error" => $mostrar["error"] // Corregido: "error" en lugar de "Error capturada"
+            ];
         }
+    
         return convertidorJSON($respuesta);
     }
+     
 
     public function AgregarLibros() {
         $resultado = $this->InsertarLibros();

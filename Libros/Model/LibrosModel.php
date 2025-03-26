@@ -57,24 +57,30 @@ class LibrosModel extends DatabaseDB{
     }
 
     //CONSULTAR LIBROS Y LLENAR LA TABLA
-    public function ConsultarLibros(){
+    public function ConsultarLibros() {
         try {
-            $sql = "SELECT libros.id_libros, libros.nombre, libros.isbn, libros.categoria, autores.codigoAutor,
-                CONCAT(autores.nombres, ' ', autores.a_paterno, ' ', autores.a_materno) AS autores,
-                COUNT(ejemplares.id_ejemplar) AS total_ejemplares
-                FROM libros
-                INNER JOIN autores ON libros.id_autor = autores.id_autor
-                INNER JOIN ejemplares ON libros.id_libros = ejemplares.id_libros
-                GROUP BY libros.id_libros, libros.nombre, libros.isbn, libros.categoria, libros.id_autor,
-                 autores.nombres, autores.a_paterno, autores.a_materno;";
+            $sql = "SELECT 
+                        l.id_libros, 
+                        l.nombre, 
+                        l.isbn, 
+                        l.categoria, 
+                        a.codigoAutor,
+                        CONCAT(a.nombres, ' ', a.a_paterno, ' ', a.a_materno) AS autores,
+                        COUNT(DISTINCT e.id_ejemplar) AS total_ejemplares
+                    FROM libros l
+                    INNER JOIN autores a ON l.id_autor = a.id_autor
+                    LEFT JOIN ejemplares e ON l.id_libros = e.id_libros
+                    GROUP BY l.id_libros, l.nombre, l.isbn, l.categoria, a.codigoAutor, a.nombres, a.a_paterno, a.a_materno";
     
             $execute = $this->conectarDBPHP()->query($sql);
             $respuesta = $execute->fetchAll(PDO::FETCH_ASSOC);
+            
             return ["estado" => true, 'libros' => $respuesta];
-        } catch (Exception $e) {
-            return ["estado" => false, 'Error capturada' => $e->getMessage()];
+        } catch (PDOException $e) {
+            return ["estado" => false, 'error' => $e->getMessage()];
         }
     }
+    
     
     
     

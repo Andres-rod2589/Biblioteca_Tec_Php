@@ -90,7 +90,7 @@ const mostrarAutorSelect = () => {
         },
         error: function (xhr, status, error) {
             console.error('Error en AJAX:', status);
-            'Intentalo más tarde';
+            console.error('Intentalo más tarde');
         }
     });
 };
@@ -189,6 +189,8 @@ const MostrarDatosTabla = () => {
         data: { peticion: "All_Libros" }, 
         dataType: "json", 
         success: function (respuesta) {
+            console.log("Respuesta del servidor:", respuesta);
+            
             if (respuesta.estado) { 
                 respuesta.datos.forEach(libros => {
                     $('#MostrarLibros').append(FilasTablaLibros(libros));
@@ -198,7 +200,7 @@ const MostrarDatosTabla = () => {
             }
         },
         error: function (xhr, status, error) {
-            console.error('Error en AJAX:', status);
+            console.error('Error en AJAX:', error);
             'Intentalo más tarde';
         }
     });

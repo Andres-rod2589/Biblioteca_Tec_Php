@@ -37,9 +37,9 @@
     <div class="container mt-5">
       <h2 style="text-align: center;">Prestamos</h2>
       <!-- Centered Button -->
-      <div class="text-center">
+      <div class="d-flex justify-content-center mb-4">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardarPrestamos">
-          Prestamos de Libros
+            Prestamos de Libros
         </button>
       </div>
       
@@ -55,26 +55,29 @@
               <form method="post" class="container">
                 <div class="row">
                   <div class="col-md-6 mt-5">
-                    <!--Codigo_Ejemplar-->
-                    <div class="row mb-3 align-items-center">
-                      <label for="codigoEjemplar" class="col-sm-4 col-form-label">Codigo Ejemplar: </label>
-                      <div class="col-sm-8">
-                          <input type="text" class="form-control" id="codigoEjemplar" name="codigoEjemplar" required>
-                          <small id="codigoEjemplarError" class="error"></small>
-                      </div>
-                    </div>
-  
+
                     <!--Nombre del libro-->
                     <div class="row mb-3 align-items-center">
                       <label for="mostrarLibros" class="col-sm-4 col-form-label">Libros:</label>
                       <div class="col-sm-8">
                           <select class="form-select" id="mostrarLibros" name="mostrarLibros" required>
-                              <option selected value="">Selecciona el libro</option>
+                              <option selected value="" disabled>Selecciona el libro</option>
                           </select>
                           <small id="mostrarLibrosError" class="error text-danger"></small>
                       </div>
                     </div>
-  
+
+                    <!--Codigo_Ejemplar-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="codigoEjemplar" class="col-sm-4 col-form-label">Codigo Ejemplar:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="codigoEjemplar" name="codigoEjemplar" required>
+
+                          </select>
+                          <small id="codigoEjemplarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
                     <!--Nombre del Usuario-->
                     <div class="row mb-3 align-items-center">
                       <label for="mostrarUsuarios" class="col-sm-4 col-form-label">Usuario:</label>
@@ -88,11 +91,15 @@
 
                     <!--ESTADO DELL LIBRO-->
                     <div class="row mb-3 align-items-center">
-                      <label for="estadoLibro" class="col-sm-4 col-form-label">Estado del libro: </label>
+                      <label for="estadoLibro" class="col-sm-4 col-form-label">Estado prestamo: </label>
                       <div class="col-sm-8">
-                          <input type="text" class="form-control" id="estadoLibro" name="estadoLibro" required>
-                          <small id="estadoLibroError" class="error"></small>
-                      </div>
+                        <select class="form-select" id="estadoLibro" name="estadoLibro" required>
+                            <option selected value="" disabled>Selecciona el estado de prestamos</option>
+                            <option value="Prestado">Prestado</option>
+                            <option value="Devuelto">Devuelto</option>
+                        </select>
+                        <small id="estadoLibroError" class="error text-danger"></small>
+                    </div>
                     </div>
                   </div>
 
@@ -136,9 +143,9 @@
       </div>
 
       <!-- Centered Search Bar -->
-      <div class="row mb-3 align-items-center mt-5 text-center">
-        <label for="buscador" class="col-sm-12 col-form-label">Buscador:</label>
-        <div class="col-sm-3 mx-auto">
+      <div class="row mb-3 align-items-center justify-content-center">
+        <label for="buscador" class="col-sm-2 col-form-label text-center">Buscador:</label>
+        <div class="col-sm-4">
             <input type="text" class="form-control" id="buscador" name="buscador" placeholder="Buscar">
             <small id="buscadorError" class="error"></small>
         </div>
@@ -162,11 +169,114 @@
             </tr>
         </tbody>
       </table>
+
+
+
+
+      <!-- Modal Actualizar-->
+      <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Editar prestamos de Libros</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" class="container">
+                <div class="row">
+                  <div class="col-md-6 mt-5">
+
+                    <!--Nombre del libro-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarLibrosActualizar" class="col-sm-4 col-form-label">Libros:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarLibrosActualizar" name="mostrarLibrosActualizar" required>
+                              <option selected value="" disabled>Selecciona el libro</option>
+                          </select>
+                          <small id="mostrarLibrosActualizarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--Codigo_Ejemplar-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="codigoEjemplarActualizar" class="col-sm-4 col-form-label">Codigo Ejemplar:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="codigoEjemplarActualizar" name="codigoEjemplarActualizar" required>
+                            <option selected value="">Selecciona el ejemplar</option>
+                          </select>
+                          <small id="codigoEjemplarActualizarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--Nombre del Usuario-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarUsuariosActualizar" class="col-sm-4 col-form-label">Usuario:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarUsuariosActualizar" name="mostrarUsuariosActualizar" required>
+                              <option selected value="">Selecciona el Usuario</option>
+                          </select>
+                          <small id="mostrarUsuariosActualizarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--ESTADO DELL LIBRO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="estadoLibroActualizar" class="col-sm-4 col-form-label">Estado prestamo: </label>
+                      <div class="col-sm-8">
+                        <select class="form-select" id="estadoLibroActualizar" name="estadoLibroActualizar" required>
+                            <option selected value="" disabled>Selecciona el estado de prestamos</option>
+                            <option value="Prestado">Prestado</option>
+                            <option value="Devuelto">Devuelto</option>
+                        </select>
+                        <small id="estadoLibroActualizarError" class="error text-danger"></small>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-5">
+                    <!--FECHA DE PRESTAMO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaPrestamosActualizar" class="col-sm-4 col-form-label">Fecha Prestamos: </label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaPrestamosActualizar" name="fechaPrestamosActualizar" required>
+                          <small id="fechaPrestamosActualizarError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--FECHA DE DECVOLUCIONES-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaDevolucionActualizar" class="col-sm-4 col-form-label">Fecha Devolución: </label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaDevolucionActualizar" name="fechaDevolucionActualizar" required>
+                          <small id="fechaDevolucionActualizarError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--OBSERVACIONES DEL LIBRO-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="ObservacionesActualizar" class="col-sm-4 col-form-label">Observaciones: </label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="ObservacionesActualizar" name="ObservacionesActualizar" required>
+                          <small id="ObservacionesActualizarError" class="error"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="guardarActualizar">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
 
     <script src="../../Assets/JQuery/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../Assets/Bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../JsPrestamos/JsPrestamos.js"></script>
+    <script type="module" src="../js/jsPrestamos.js"></script>
 </body>
 </html>
