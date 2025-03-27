@@ -99,13 +99,26 @@ class PestamosModel extends DatabaseDB{
     }
 
     public function ObtenerIdUsuario() {
-        $sql = "SELECT id_usuario FROM usuario WHERE codigoUsuario = :codigoUsuario;";
-        $execute = $this->conectarDBPHP()->prepare($sql);
-        $execute->execute([
-            ':codigoUsuario' => $this->codigoUsuario
-        ]);
-        $respuesta = $execute->fetch(PDO::FETCH_ASSOC);
-        return $respuesta['id_usuario'] ?? null;
+        try {
+            $sql = "SELECT id_usuario FROM usuario WHERE codigoUsuario = :codigoUsuario;";
+            $execute = $this->conectarDBPHP()->prepare($sql);
+            $execute->execute([
+                ':codigoUsuario' => $this->codigoUsuario
+            ]);
+            $respuesta = $execute->fetch(PDO::FETCH_ASSOC);
+
+            // Debugging log
+            if (!$respuesta) {
+                error_log("No user found for codigoUsuario: " . $this->codigoUsuario);
+            } else {
+                error_log("User found: " . json_encode($respuesta));
+            }
+
+            return $respuesta['id_usuario'] ?? null;
+        } catch (Exception $e) {
+            error_log("Error in ObtenerIdUsuario: " . $e->getMessage());
+            return null;
+        }
     }
     
     public function ObtenerIdEjemplar() {
@@ -160,6 +173,40 @@ class PestamosModel extends DatabaseDB{
             return ["estado" => true, 'MSG' => 'Preestamo agregado exitosamente'];
         } catch (Exception $e) {
             return ["estado" => false, 'Error capturada' => $e->getMessage()];
+        }
+    }
+
+    public function EditarPrestamo() {
+        try {
+            $id_usuario = $this->ObtenerIdUsuario();
+
+            if (!$id_usuario) {
+                return ["estado" => false, "Error" => "Usuario no válido"];
+            }
+
+            $sql = "UPDATE prestamo 
+                    SET fecha_devolucion = :fecha_devolucion, estado = :estado 
+                    WHERE id_usuario = :id_usuario";
+            $execute = $this->conectarDBPHP()->prepare($sql);
+            $execute->execute([
+                ':fecha_devolucion' => $this->fechaDevolucion,
+                ':estado' => $this->estado,
+                ':id_usuario' => $id_usuario
+            ]);
+
+            $sql = "UPDATE ejemplares 
+                    SET observaciones = :observaciones 
+                    WHERE id_ejemplar = (SELECT id_ejemplar FROM prestamo WHERE id_usuario = :id_usuario)";
+            $execute = $this->conectarDBPHP()->prepare($sql);
+            $execute->execute([
+                ':observaciones' => $this->observaciones,
+                ':id_usuario' => $id_usuario
+            ]);
+
+            return ["estado" => true, "MSG" => "Prestamo actualizado correctamente"];
+        } catch (Exception $e) {
+            error_log("Error in EditarPrestamo: " . $e->getMessage());
+            return ["estado" => false, "Error capturada" => $e->getMessage()];
         }
     }
 }

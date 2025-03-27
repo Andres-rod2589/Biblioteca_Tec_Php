@@ -24,6 +24,8 @@ class PrestamosController extends PestamosModel{
                 return $this->InsertarPrestamos();
             case 'All_Prestamos':
                 return $this->MostrarPrestamos();
+            case 'Actualizar_Prestamos':
+                return $this->ActualizarPrestamos();
             default:
                 return convertidorJSON(["estado" => False, "MSG" => "Peticion desconocida"]);
         }
@@ -88,6 +90,27 @@ class PrestamosController extends PestamosModel{
         }
         return convertidorJSON($respuesta);
     }
+
+    public function ActualizarPrestamos() {
+        try {
+            $mostrar = $this->EditarPrestamo();
+
+            if ($mostrar['estado']) {
+                $respuesta = ["estado" => true, "MSG" => "Prestamo actualizado exitosamente"];
+            } else if (isset($mostrar['Error'])) {
+                $respuesta = ["estado" => false, "MSG" => $mostrar['Error']];
+            } else if (isset($mostrar['Error capturada'])) {
+                $respuesta = ["estado" => false, "MSG" => "Error en la base de datos", "error" => $mostrar['Error capturada']];
+            } else {
+                $respuesta = ["estado" => false, "MSG" => "Ocurrio un error inesperado"];
+            }
+
+            return convertidorJSON($respuesta);
+        } catch (Exception $e) {
+            error_log("Error in ActualizarPrestamos: " . $e->getMessage());
+            return convertidorJSON(["estado" => false, "MSG" => "Error en el servidor", "error" => $e->getMessage()]);
+        }
+    }
     
     
 
@@ -105,4 +128,4 @@ $objAutores->Peticiones();
 
 #SIMULACION DE PETICIONES DE LOS CLIENTES
 #EN EL CONTROLDAOR VA A REIBIR LA PETICION VAMOS A DEFINIR LA DUNCION "MOSTRAR AUTORS" DENTRO DE ELLA VAMMOS A INVICAR EL MODELO DEL PADRE LA FUNCION
-?> 
+?>

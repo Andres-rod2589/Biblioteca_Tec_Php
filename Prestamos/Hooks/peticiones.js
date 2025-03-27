@@ -53,25 +53,22 @@ export const mostrarUsuariosEjemplar = () => {
     $.ajax({
         url: "../Controller/PrestamosController.php",
         method: "POST", 
-        data: { peticion: "All_UsuariosEjemplares"}, 
+        data: { peticion: "All_UsuariosEjemplares" }, 
         dataType: "json", 
         success: function (respuesta) {
-            
+            let select = $('#mostrarUsuarios, #mostrarUsuariosActualizar');
+            select.empty();
+            select.append(`<option selected value="">Selecciona al Usuario</option>`);
             if (respuesta.estado) { 
-                
-                let select = $('#mostrarUsuarios');
-                select.empty();
-                select.append(`<option selected value="">Selecciona al Usuario</option>`);
                 respuesta.UsuarioEjemplares.forEach(usuario => {
                     select.append(`<option value="${usuario.codigoUsuario}">${usuario.nombre_completo}</option>`);
                 });                
-            }
-            else {
+            } else {
                 console.error(respuesta.MSG);
             }
         },
         error: function (xhr, status, error) {
-            console.error('estado', status,"error", error, "xhr", xhr);
+            console.error('Error en AJAX:', status, error);
         }
     });
 };
@@ -115,6 +112,33 @@ export const MostrarDatosTabla = () => {
         error: function (xhr, status, error) {
             console.error('Error en AJAX:', status);
             mesajes(respuesta,true);
+        }
+    });
+};
+
+export const actualizarPrestamo = (datos) => {
+    console.log('Sending AJAX request with data:', datos); // Debugging log
+
+    $.ajax({
+        url: "../Controller/PrestamosController.php",
+        method: "POST",
+        data: { peticion: "Actualizar_Prestamos", paquete: datos },
+        dataType: "json",
+        success: function (respuesta) {
+            console.log('Response received:', respuesta); // Debugging log
+
+            if (respuesta.estado) {
+                mesajes(respuesta, false);
+                $('#modalActualizar').modal('hide');
+                MostrarDatosTabla();
+            } else {
+                console.error('Error in response:', respuesta.MSG);
+                mesajes(respuesta, true);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX error:', status, error); // Debugging log
+            mesajes({ estado: false, MSG: 'Error en la solicitud' }, true);
         }
     });
 };
