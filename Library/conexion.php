@@ -1,7 +1,7 @@
 <?php
 class DatabaseDB{
     private $host = 'localhost';
-    private $dbname = 'biblioteca';
+    private $dbname = 'bblio-laf';
     private $user = 'root';
     private $password ='';
 

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Assets/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Assets/css/cssVentas.css">
+    <title>Ventas</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../../Libros/View/LibrosView.html">BIBLIOTECA</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../../Prestamos/View/PrestamosView.html">Prestamos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Autores/View/AutoresView.html">Autores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Usuarios/View/UsuariosView.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Ventas/View/VentasView.html">Ventas</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2 style="text-align: center;">Ventas</h2>
+      <!-- Centered Button -->
+      <div class="d-flex justify-content-center mb-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#guardarVentas">
+            Registrar Venta
+        </button>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="guardarVentas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Registrar Venta</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" class="container">
+                <div class="row">
+                  <div class="col-md-6 mt-5">
+
+                    <!--Nombre del libro-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarLibros" class="col-sm-4 col-form-label">Libro:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarLibros" name="mostrarLibros" required>
+                              <option selected value="" disabled>Selecciona el libro</option>
+                          </select>
+                          <small id="mostrarLibrosError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--Cantidad-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="cantidad" class="col-sm-4 col-form-label">Cantidad:</label>
+                      <div class="col-sm-8">
+                          <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                          <small id="cantidadError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--Precio-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="precio" class="col-sm-4 col-form-label">Precio:</label>
+                      <div class="col-sm-8">
+                          <input type="number" class="form-control" id="precio" name="precio" required>
+                          <small id="precioError" class="error text-danger"></small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-5">
+                    <!--Fecha de Venta-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaVenta" class="col-sm-4 col-form-label">Fecha Venta:</label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaVenta" name="fechaVenta" required>
+                          <small id="fechaVentaError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--Observaciones-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="observaciones" class="col-sm-4 col-form-label">Observaciones:</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="observaciones" name="observaciones">
+                          <small id="observacionesError" class="error"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="guardarVenta">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centered Search Bar -->
+      <div class="row mb-3 align-items-center justify-content-center">
+        <label for="buscador" class="col-sm-2 col-form-label text-center">Buscador:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="buscador" name="buscador" placeholder="Buscar">
+            <small id="buscadorError" class="error"></small>
+        </div>
+      </div>
+      
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Libro</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Fecha Venta</th>
+            <th scope="col">Observaciones</th>
+            <th colspan="2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="mostrar">
+            <!-- Example row -->
+            <tr data-id="1">
+                <td>001</td>
+                <td>Book Title</td>
+                <td>2</td>
+                <td>$400</td>
+                <td>2023-10-01</td>
+                <td>Sin observaciones</td>
+                <td><button class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalActualizar">Actualizar</button></td>
+                <td><button class="btn btn-danger btn-eliminar">Eliminar</button></td>
+            </tr>
+        </tbody>
+      </table>
+
+      <!-- Modal Actualizar -->
+      <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Editar Venta</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" class="container">
+                <div class="row">
+                  <div class="col-md-6 mt-5">
+                    <!--Nombre del libro-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="mostrarLibrosActualizar" class="col-sm-4 col-form-label">Libro:</label>
+                      <div class="col-sm-8">
+                          <select class="form-select" id="mostrarLibrosActualizar" name="mostrarLibrosActualizar" required>
+                              <option selected value="" disabled>Selecciona el libro</option>
+                          </select>
+                          <small id="mostrarLibrosActualizarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+
+                    <!--Cantidad-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="cantidadActualizar" class="col-sm-4 col-form-label">Cantidad:</label>
+                      <div class="col-sm-8">
+                          <input type="number" class="form-control" id="cantidadActualizar" name="cantidadActualizar" required>
+                          <small id="cantidadActualizarError" class="error text-danger"></small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 mt-5">
+                    <!--Fecha de Venta-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="fechaVentaActualizar" class="col-sm-4 col-form-label">Fecha Venta:</label>
+                      <div class="col-sm-8">
+                          <input type="date" class="form-control" id="fechaVentaActualizar" name="fechaVentaActualizar" required>
+                          <small id="fechaVentaActualizarError" class="error"></small>
+                      </div>
+                    </div>
+
+                    <!--Observaciones-->
+                    <div class="row mb-3 align-items-center">
+                      <label for="observacionesActualizar" class="col-sm-4 col-form-label">Observaciones:</label>
+                      <div class="col-sm-8">
+                          <input type="text" class="form-control" id="observacionesActualizar" name="observacionesActualizar">
+                          <small id="observacionesActualizarError" class="error"></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="guardarActualizar">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script src="../../Assets/JQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../Assets/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/jsVentas.js"></script>
+</body>
+</html>

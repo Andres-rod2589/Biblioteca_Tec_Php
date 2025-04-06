@@ -9,6 +9,8 @@ class PestamosModel extends DatabaseDB{
     private $fechaDevolucion;
     private $estado;
     private $observaciones;
+    private $id_prestamo; // Add id_prestamo property
+
     public function __construct($paquete = null){
         parent::__construct();
         $this->isbn = $paquete['isbn'] ?? null;
@@ -18,6 +20,7 @@ class PestamosModel extends DatabaseDB{
         $this->fechaDevolucion = $paquete['fechaDevolucion'] ?? null;
         $this->estado = $paquete['estado'] ?? null;
         $this->observaciones = $paquete['observaciones'] ?? null;
+        $this->id_prestamo = $paquete['id_prestamo'] ?? null; // Set id_prestamo
     }
 
     public function ConsultarPrestamos() {
@@ -178,36 +181,93 @@ class PestamosModel extends DatabaseDB{
 
     public function EditarPrestamo() {
         try {
-            $id_usuario = $this->ObtenerIdUsuario();
-
-            if (!$id_usuario) {
-                return ["estado" => false, "Error" => "Usuario no válido"];
+            if (!$this->id_prestamo) {
+                return ["estado" => false, "Error" => "El id_prestamo es requerido."];
             }
-
+    
+            // Conectar a la base de datos
+            $db = $this->conectarDBPHP();
+            $db->beginTransaction(); // Iniciar transacción
+    
+            // Actualizar el préstamo
             $sql = "UPDATE prestamo 
                     SET fecha_devolucion = :fecha_devolucion, estado = :estado 
-                    WHERE id_usuario = :id_usuario";
-            $execute = $this->conectarDBPHP()->prepare($sql);
-            $execute->execute([
+                    WHERE id_prestamo = :id_prestamo";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([
                 ':fecha_devolucion' => $this->fechaDevolucion,
                 ':estado' => $this->estado,
-                ':id_usuario' => $id_usuario
+                ':id_prestamo' => $this->id_prestamo
             ]);
-
+    
+            // Actualizar observaciones en ejemplares
             $sql = "UPDATE ejemplares 
                     SET observaciones = :observaciones 
-                    WHERE id_ejemplar = (SELECT id_ejemplar FROM prestamo WHERE id_usuario = :id_usuario)";
-            $execute = $this->conectarDBPHP()->prepare($sql);
-            $execute->execute([
+                    WHERE id_ejemplar = (SELECT id_ejemplar FROM prestamo WHERE id_prestamo = :id_prestamo)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([
                 ':observaciones' => $this->observaciones,
-                ':id_usuario' => $id_usuario
+                ':id_prestamo' => $this->id_prestamo
             ]);
-
-            return ["estado" => true, "MSG" => "Prestamo actualizado correctamente"];
+    
+            // Confirmar transacción
+            $db->commit();
+            return ["estado" => true, "MSG" => "Préstamo actualizado correctamente"];
+            
         } catch (Exception $e) {
-            error_log("Error in EditarPrestamo: " . $e->getMessage());
-            return ["estado" => false, "Error capturada" => $e->getMessage()];
+            // Revertir cambios si hay un error
+            if (isset($db)) {
+                $db->rollBack();
+            }
+    
+            error_log("Error en EditarPrestamo: " . $e->getMessage());
+            return ["estado" => false, "Error" => $e->getMessage()];
         }
     }
+
+    public function EliminarPrestamo($id_prestamo) {
+        try {
+            if (!$id_prestamo) {
+                return ["estado" => false, "Error" => "El id_prestamo es requerido."];
+            }
+    
+            error_log("Intentando eliminar el préstamo con ID: " . $id_prestamo);
+    
+            // Conectar a la base de datos
+            $db = $this->conectarDBPHP();
+            $db->beginTransaction(); // Iniciar transacción
+    
+            // Verificar si el préstamo existe antes de eliminarlo
+            $sql = "SELECT id_prestamo FROM prestamo WHERE id_prestamo = :id_prestamo";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':id_prestamo' => $id_prestamo]);
+    
+            if ($stmt->rowCount() === 0) {
+                $db->rollBack();
+                return ["estado" => false, "Error" => "No se encontró el préstamo con el ID proporcionado."];
+            }
+    
+            // Eliminar el préstamo
+            $sql = "DELETE FROM prestamo WHERE id_prestamo = :id_prestamo";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':id_prestamo' => $id_prestamo]);
+    
+            if ($stmt->rowCount() > 0) {
+                $db->commit(); // Confirmar eliminación
+                return ["estado" => true, "MSG" => "Préstamo eliminado correctamente."];
+            } else {
+                $db->rollBack();
+                return ["estado" => false, "Error" => "No se pudo eliminar el préstamo."];
+            }
+        } catch (Exception $e) {
+            if (isset($db)) {
+                $db->rollBack();
+            }
+            error_log("Error en EliminarPrestamo: " . $e->getMessage());
+            return ["estado" => false, "Error" => $e->getMessage()];
+        }
+    }
+    
+    
 }
 ?>

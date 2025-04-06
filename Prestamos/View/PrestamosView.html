@@ -27,7 +27,10 @@
                 <a class="nav-link" href="../../Usuarios/View/UsuariosView.html">Usuarios</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a>
+                <a class="nav-link" href="../../Libros/View/LibrosView.html">Libros</a> 
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Ventas/View/VentasView.html">Ventas</a>
               </li>
             </ul>
           </div>
@@ -165,7 +168,17 @@
           </tr>
         </thead>
         <tbody id="mostrar">
-            <tr>
+            <!-- Example row -->
+            <tr data-id="1"> <!-- Ensure id_prestamo is correctly set -->
+                <td>001</td>
+                <td>Book Title</td>
+                <td>John Doe</td>
+                <td>2023-10-01</td>
+                <td>2023-10-15</td>
+                <td>Prestado</td>
+                <td>Good condition</td>
+                <td><button class="btn btn-warning btn-actualizar" data-bs-toggle="modal" data-bs-target="#modalActualizar">Actualizar</button></td>
+                <td><button class="btn btn-danger btn-eliminar">Eliminar</button></td>
             </tr>
         </tbody>
       </table>

@@ -8,7 +8,7 @@
     <title>Usuarios</title>
 </head>
 <body>
-
+ 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="LibrosView.html">BIBLIOTECA</a>
@@ -28,6 +28,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="../../Prestamos/View/PrestamosView.html">Prestamos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../../Ventas/View/VentasView.html">Ventas</a>
               </li>
             </ul>
           </div>
@@ -104,6 +107,18 @@
                                         <input type="text" class="form-control eventos" id="cp" name="cp" minlength="5" maxlength="5" required>
                                         <small id="cpError" class="error"></small>
                                     </div>
+                                    <!-- Campo Correo Electrónico -->
+                                    <div class="mb-3">
+                                        <label for="correo" class="form-label">Correo Electrónico:</label>
+                                        <input type="email" class="form-control eventos" id="correo" name="correo" required>
+                                        <small id="correoError" class="error"></small>
+                                    </div>
+                                    <!-- Campo Contraseña -->
+                                    <div class="mb-3">
+                                        <label for="contrasena" class="form-label">Contraseña:</label>
+                                        <input type="password" class="form-control eventos" id="contrasena" name="contrasena" required>
+                                        <small id="contrasenaError" class="error"></small>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -136,6 +151,7 @@
                 <th scope="col">N_Exterior</th>
                 <th scope="col">N_Interior</th>
                 <th scope="col">Cp</th>
+                <th scope="col">Correo Electrónico</th>
                 <th scope="col">Codigo</th>
                 <th colspan="2">Acciones</th>
               </tr>
@@ -226,6 +242,28 @@
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control eventos" id="cpActualizar" name="cpActualizar" minlength="5" maxlength="5" required>
                                             <small id="cpActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="correoActualizar" class="col-sm-4 col-form-label">Correo Electrónico:</label>
+                                        <div class="col-sm-8">
+                                            <input type="email" class="form-control eventos" id="correoActualizar" name="correoActualizar" required>
+                                            <small id="correoActualizarError" class="error"></small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="contrasenaActual" class="col-sm-4 col-form-label">Contraseña Actual:</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control eventos" id="contrasenaActual" name="contrasenaActual" required>
+                                            <small id="contrasenaActualError" class="error"></small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <label for="nuevaContrasena" class="col-sm-4 col-form-label">Nueva Contraseña:</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control eventos" id="nuevaContrasena" name="nuevaContrasena">
+                                            <small id="nuevaContrasenaError" class="error"></small>
                                         </div>
                                     </div>
 

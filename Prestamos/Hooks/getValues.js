@@ -1,12 +1,12 @@
-export const getValuesLibroEjemplar = () =>{
+export const getValuesLibroEjemplar = () => {
     let isbn = $('#mostrarLibros').val();
     let isbnLibro = {
         "isbn": isbn
     };
-    return isbnLibro
-}
+    return isbnLibro;
+};
 
-export const getValuesPrestamo = () =>{
+export const getValuesPrestamo = () => {
     let codigoUsuario = $('#mostrarUsuarios').val();
     let codigoEjemplar = $('#codigoEjemplar').val();
     let fechaPrestamo = $('#fechaPrestamos').val();
@@ -21,11 +21,11 @@ export const getValuesPrestamo = () =>{
         "estado": estado,
         "observaciones": observaciones
     };
-    return prestamo
-}
+    return prestamo;
+};
 
 const BtnEliminar = () => {
-    return `<button class="btn btn-danger" onclick="eliminarUsuario()">Eliminar</button>`;
+    return `<button class="btn btn-danger btn-eliminar">Eliminar</button>`; // Use the btn-eliminar class
 };
 
 const BtnActualizar = () => {
@@ -34,7 +34,7 @@ const BtnActualizar = () => {
 
 export const FilasTablaPrestamos = (prestamo) => {
     return `
-        <tr>
+        <tr data-id="${prestamo.id_prestamo}"> <!-- Ensure id_prestamo is correctly set -->
             <td>${prestamo.Codigo}</td>
             <td>${prestamo.Libro}</td>
             <td>${prestamo.Usuario}</td>
